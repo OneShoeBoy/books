@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer ></script>
+  </head>
+  <body>
+    <div>
+      <button id="newBookBtn">Add new book</button>
+    </div>
+    <div id="bookContainer">
+    </div>
+    <dialog id="formContainer">
+      <form class='form' id='newBookForm'>
+        <button class='closeModal' id='closeModalBtn' type='button'>X</button>
+        <ul>
+          <li>
+            <label for='title'>Title</label>
+            <input type='text' id='title' name='title' value=''>
+          </li>
+          <li>
+            <label for='author'>Author</label>
+            <input type='text' id='author' name='author' value=''>
+          </li>
+          <li>
+            <label for='pages'>Pages</label>
+            <input type='number' id='pages' name='pages' value=''>
+          </li>
+          <li>
+            <label for='readTrue'>Read</label>
+            <input type='radio' id='readTrue' name='read' value='true'>
+          </li>
+          <li>
+            <label for='readFalse'>Not Read</label>
+            <input type='radio' id='readFalse' name='read' value='false' checked>
+          </li>
+          <button type='submit' id='addBook' form='newBookForm'>Add Book</button>
+        </ul>
+      </form>
+    </dialog>
+  </body>
+</html>
