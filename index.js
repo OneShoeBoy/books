@@ -16,6 +16,10 @@ myLibrary.push(theHobbit);
 myLibrary.push(theEyeOfTheWorld);
 // ------------------
 
+Book.prototype.switchRead = function (item) {
+  item.read = !item.read;
+  return item.read;
+}
 
 function addReadButtonHandler() {
   const readButton = document.querySelectorAll('#readButton');
@@ -27,8 +31,11 @@ function addReadButtonHandler() {
       myLibrary.forEach((item, index) => {
 
         if (item.id === id) {
+          console.log(myLibrary);
           item.read = !item.read;
-          console.log(item.read);
+          console.log(`${item.title}: ${item.read}`);
+          const elementToChange = document.querySelector(`[data-id='${item.id}'] > .bookRead`)
+          elementToChange.textContent = `Read: ${item.read}`;
           return;
         }
       })
@@ -52,7 +59,7 @@ function addDeleteButtonHandler() {
         if (item.id === id) {
           myLibrary.splice(index, 1);
           console.log(myLibrary);
-          const elementToRemove = document.getElementById(`${id}`)
+          const elementToRemove = document.querySelector(`[data-id='${item.id}']`);
           elementToRemove.remove();
           return;
 
@@ -66,7 +73,7 @@ function renderBookCard(data) {
   const bookContainer = document.getElementById('bookContainer');
   const bookCard = document.createElement('div');
   bookCard.classList.toggle('bookCard');
-  bookCard.setAttribute('id', data.id);
+  bookCard.dataset.id = data.id;
 
   bookContainer.appendChild(bookCard);
 
