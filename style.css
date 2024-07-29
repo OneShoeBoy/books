@@ -1,10 +1,26 @@
+button{
+  padding: 2px;
+  margin: 2px;
+  border: solid 1px;
+  border-radius: 5px;
+}
 #bookContainer{
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .bookCard{
   padding: 10px;
   margin: 5px;
   border: solid;
+}
+
+#newBookBtn{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  height: content;
+  width: content;
+  font-size: 1.3rem;
 }
 
