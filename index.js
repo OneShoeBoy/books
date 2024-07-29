@@ -16,6 +16,28 @@ myLibrary.push(theHobbit);
 myLibrary.push(theEyeOfTheWorld);
 // ------------------
 
+
+function addReadButtonHandler() {
+  const readButton = document.querySelectorAll('#readButton');
+  readButton.forEach((button) => {
+    button.addEventListener('click', () => {
+
+      const id = Number(button.dataset.id);
+
+      myLibrary.forEach((item, index) => {
+
+        if (item.id === id) {
+          item.read = !item.read;
+          console.log(item.read);
+          return;
+        }
+      })
+      console.log(myLibrary);
+    })
+  })
+}
+
+
 function addDeleteButtonHandler() {
 
   const deleteBookBtn = document.querySelectorAll('#deleteBookBtn');
@@ -44,6 +66,7 @@ function renderBookCard(data) {
   const bookContainer = document.getElementById('bookContainer');
   const bookCard = document.createElement('div');
   bookCard.classList.toggle('bookCard');
+  bookCard.setAttribute('id', data.id);
 
   bookContainer.appendChild(bookCard);
 
@@ -85,117 +108,16 @@ function renderBookCard(data) {
 
 }
 
-function addReadButtonHandler() {
-  const readButton = document.querySelectorAll('#readButton');
-  readButton.forEach((button) => {
-    button.addEventListener('click', () => {
-
-      const id = Number(button.dataset.id);
-
-      myLibrary.forEach((item, index) => {
-
-        if (item.id === id) {
-          item.read = !item.read;
-          console.log(item.read);
-          return;
-        }
-      })
-      console.log(myLibrary);
-    })
-  })
-}
 
 
 function displayBooks(library) {
-  const bookContainer = document.getElementById('bookContainer')
 
   if (library.length) {
     for (i = 0; i < library.length; i++) {
-      renderBookCard(library[i])
-      // console.log('entering if');
-      // const bookCard = document.createElement('div');
-      // bookContainer.appendChild(bookCard);
-      // bookCard.classList.toggle('bookCard');
-      // bookCard.setAttribute('id', i);
-      //
-      // const title = document.createElement('div');
-      // const author = document.createElement('div');
-      // const pages = document.createElement('div');
-      // const read = document.createElement('div');
-      // const deleteBookBtn = document.createElement('button');
-      // const readButton = document.createElement('button');
-      //
-      // bookCard.appendChild(title);
-      // title.classList.toggle('bookTitle');
-      //
-      // bookCard.appendChild(author);
-      // author.classList.toggle('bookAuthor');
-      //
-      // bookCard.appendChild(pages);
-      // pages.classList.toggle('bookPages');
-      //
-      // bookCard.appendChild(read);
-      // read.classList.toggle('bookRead');
-      //
-      // bookCard.appendChild(readButton);
-      // readButton.classList.toggle('readButton');
-      // readButton.setAttribute('id', 'readButton');
-      // readButton.dataset.id = i;
-      //
-      // bookCard.appendChild(deleteBookBtn);
-      // deleteBookBtn.classList.toggle('deleteBookBtn');
-      // deleteBookBtn.setAttribute('id', 'deleteBookBtn');
-      // deleteBookBtn.dataset.id = i;
-      //
-      // title.textContent = `Title: ${library[i].title}`;
-      // author.textContent = `Author: ${library[i].author}`;
-      // pages.textContent = `Pages: ${library[i].pages}`;
-      // read.textContent = `Read: ${library[i].read}`;
-      // readButton.textContent = `Toggle read`;
-      // deleteBookBtn.textContent = 'Remove book';
+      renderBookCard(library[i]);
     }
   } else {
-    // console.log('entering for');
-    const bookCard = document.createElement('div');
-    bookContainer.appendChild(bookCard);
-    bookCard.classList.toggle('bookCard');
-    bookCard.setAttribute('id', ((myLibrary.length) - 1));
-
-    const title = document.createElement('div');
-    const author = document.createElement('div');
-    const pages = document.createElement('div');
-    const read = document.createElement('div');
-    const readButton = document.createElement('button');
-    const deleteBookBtn = document.createElement('button');
-
-    bookCard.appendChild(title);
-    title.classList.toggle('bookTitle');
-
-    bookCard.appendChild(author);
-    author.classList.toggle('bookAuthor');
-
-    bookCard.appendChild(pages);
-    pages.classList.toggle('bookPages');
-
-    bookCard.appendChild(read);
-    read.classList.toggle('bookRead');
-
-    bookCard.appendChild(readButton);
-    readButton.classList.toggle('readButton');
-    readButton.setAttribute('id', 'readButton');
-    readButton.dataset.id = i;
-
-    bookCard.appendChild(deleteBookBtn);
-    deleteBookBtn.classList.toggle('deleteBookBtn');
-    deleteBookBtn.setAttribute('id', 'deleteBookBtn');
-    deleteBookBtn.dataset.id = ((myLibrary.length) - 1);
-
-    title.textContent = `Title: ${library.title}`;
-    author.textContent = `Author: ${library.author}`;
-    pages.textContent = `Pages: ${library.pages}`;
-    read.textContent = `Read: ${library.read}`;
-    readButton.textContent = `Toggle read`;
-    deleteBookBtn.textContent = 'Remove book';
+    renderBookCard(library);
   }
 
   addDeleteButtonHandler();
