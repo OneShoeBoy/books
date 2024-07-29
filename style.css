@@ -1,5 +1,10 @@
+#bookContainer{
+  display: flex;
+  flex-direction: row;
+}
 .bookCard{
   padding: 10px;
   margin: 5px;
   border: solid;
 }
+

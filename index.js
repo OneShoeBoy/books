@@ -16,58 +16,42 @@ myLibrary.push(theHobbit);
 myLibrary.push(theEyeOfTheWorld);
 // ------------------
 
-Book.prototype.switchRead = function (item) {
-  item.read = !item.read;
-  return item.read;
+Book.prototype.switchRead = function () {
+  this.read = !this.read;
+  return this.read;
 }
 
-function addReadButtonHandler() {
-  const readButton = document.querySelectorAll('#readButton');
-  readButton.forEach((button) => {
-    button.addEventListener('click', () => {
 
-      const id = Number(button.dataset.id);
-
-      myLibrary.forEach((item, index) => {
-
-        if (item.id === id) {
-          console.log(myLibrary);
-          item.read = !item.read;
-          console.log(`${item.title}: ${item.read}`);
-          const elementToChange = document.querySelector(`[data-id='${item.id}'] > .bookRead`)
-          elementToChange.textContent = `Read: ${item.read}`;
-          return;
-        }
-      })
-      console.log(myLibrary);
+function addReadButtonHandler(element) {
+  const readButton = document.querySelector(`[data-id='${element}'] > .readButton`);
+  readButton.addEventListener('click', (button) => {
+    const id = Number(element);
+    myLibrary.forEach((item, index) => {
+      if (item.id === id) {
+        item.switchRead();
+        const elementToChange = document.querySelector(`[data-id='${item.id}'] > .bookRead`)
+        console.log(elementToChange);
+        elementToChange.textContent = `Read: ${item.read}`;
+      }
     })
   })
 }
 
 
-function addDeleteButtonHandler() {
-
-  const deleteBookBtn = document.querySelectorAll('#deleteBookBtn');
-  deleteBookBtn.forEach((button) => {
-
-    button.addEventListener('click', () => {
-
-      const id = Number(button.dataset.id);
-
-      myLibrary.forEach((item, index) => {
-
-        if (item.id === id) {
-          myLibrary.splice(index, 1);
-          console.log(myLibrary);
-          const elementToRemove = document.querySelector(`[data-id='${item.id}']`);
-          elementToRemove.remove();
-          return;
-
-        }
-      })
+function addDeleteButtonHandler(element) {
+  const deleteBookBtn = document.querySelector(`[data-id='${element}'] > .deleteBookBtn`);
+  deleteBookBtn.addEventListener('click', (button) => {
+    const id = Number(element);
+    myLibrary.forEach((item, index) => {
+      if (item.id === id) {
+        myLibrary.splice(index, 1);
+        const elementToRemove = document.querySelector(`[data-id='${item.id}']`);
+        elementToRemove.remove();
+      }
     })
   })
 }
+
 
 function renderBookCard(data) {
   const bookContainer = document.getElementById('bookContainer');
@@ -113,12 +97,13 @@ function renderBookCard(data) {
   readButton.textContent = `Toggle read`;
   deleteBookBtn.textContent = 'Remove book';
 
+  addDeleteButtonHandler(deleteBookBtn.dataset.id);
+  addReadButtonHandler(readButton.dataset.id);
 }
 
 
 
 function displayBooks(library) {
-
   if (library.length) {
     for (i = 0; i < library.length; i++) {
       renderBookCard(library[i]);
@@ -126,10 +111,6 @@ function displayBooks(library) {
   } else {
     renderBookCard(library);
   }
-
-  addDeleteButtonHandler();
-  addReadButtonHandler();
-
 }
 
 function addBookToLibrary() {
